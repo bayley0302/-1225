@@ -296,7 +296,7 @@ function wall() {
   async function load(initial = false) {
     if (initial) status.textContent = '正在加载大家的祝福…';
     try {
-      const response = await fetch(wallApi + '?select=id,name,message,created_at&order=created_at.desc&limit=100', {
+      const response = await fetch(wallApi + '?select=id,name,message,created_at&order=created_at.desc&limit=1000', {
         headers: wallHeaders
       });
       if (!response.ok) throw new Error('读取失败');
@@ -332,7 +332,7 @@ function wall() {
       if (!response.ok) throw new Error('写入失败');
       const [entry] = await response.json();
       entries.unshift(entry);
-      entries = entries.slice(0, 100);
+      entries = entries.slice(0, 1000);
       status.textContent = '祝福已发布。';
       draw();
       form.reset();
